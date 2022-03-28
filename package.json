@@ -1,0 +1,28 @@
+{
+  "name": "backends_mykof",
+  "version": "1.0.0",
+  "description": "api for mykof",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir build",
+    "dev": "nodemon --exec ./node_modules/.bin/babel-node index.js",
+    "start": "node build/index.js"
+  },
+  "keywords": [],
+  "author": "Lucas Pereyra",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.8",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "nodemon": "^2.0.15"
+  }
+}
