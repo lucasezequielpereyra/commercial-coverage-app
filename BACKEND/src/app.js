@@ -3,8 +3,12 @@ import morgan from 'morgan';
 import cors from 'cors';
 import pkg from '../package.json';
 import clientsRoute from './routes/clients.routes';
+import { createRoles } from './libs/initialSetup';
 
 const app = express();
+
+/*  INITIAL CONFIG   */
+createRoles();
 
 app.use(morgan('dev'));
 app.use(express.json());
