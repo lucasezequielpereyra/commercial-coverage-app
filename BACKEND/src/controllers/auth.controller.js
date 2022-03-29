@@ -35,23 +35,29 @@ export const signIn = async (req, res) => {
       'roles',
     );
 
-    const matchPassword = await User.comparePassword(
-      req.body.password,
-      userFound.password,
-    );
+    if (userFound) {
+      const matchPassword = await User.comparePassword(
+        req.body.password,
+        userFound.password,
+      );
 
-    if (!matchPassword)
-      return res.status(401).json({ token: null, message: 'Invalid password' });
+      if (!matchPassword)
+        return res
+          .status(401)
+          .json({ token: null, message: 'Invalid password' });
 
-    if (!userFound)
-      return res.status(400).json({ token: null, message: 'User not found' });
+      if (!userFound)
+        return res.status(400).json({ token: null, message: 'User not found' });
 
-    const token = jwt.sign({ id: userFound._id }, SECRET_WORD, {
-      expiresIn: 86400,
-    });
+      const token = jwt.sign({ id: userFound._id }, SECRET_WORD, {
+        expiresIn: 86400,
+      });
 
-    res.json({ token });
+      res.json({ token });
+    } else {
+      res.json({ error: 'User not found' });
+    }
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json({ error: error.message });
   }
 };
