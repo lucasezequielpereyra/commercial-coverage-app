@@ -3,6 +3,8 @@ import morgan from 'morgan';
 import cors from 'cors';
 import pkg from '../package.json';
 import clientsRoute from './routes/clients.routes';
+import authRoute from './routes/auth.routes';
+import usersRoute from './routes/users.routes';
 import { createRoles } from './libs/initialSetup';
 
 const app = express();
@@ -26,6 +28,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1/files', clientsRoute);
+app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/users', usersRoute);
 
 app.get('*', (req, res) => {
   res.status(404).json({

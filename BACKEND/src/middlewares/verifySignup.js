@@ -1,5 +1,5 @@
-import Role from '../models/Role';
-import User from '../models/User';
+import Role from '../models/role.model';
+import User from '../models/user.model';
 
 export const verifyRolesExist = async (req, res, next) => {
   try {
