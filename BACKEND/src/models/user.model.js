@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 
 const userSchema = new Schema(
   {
-    user: {
+    username: {
       type: String,
       unique: true,
       caseSensitive: false,
