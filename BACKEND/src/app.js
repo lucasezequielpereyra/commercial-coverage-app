@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import bodyParser from 'body-parser';
 import pkg from '../package.json';
 import clientsRoute from './routes/clients.routes';
 import authRoute from './routes/auth.routes';
@@ -14,6 +15,7 @@ createRoles();
 
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.set('pkg', pkg);
