@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import pkg from '../package.json';
+import clientsRoute from './routes/clients.routes';
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.get('/', (req, res) => {
     version: app.get('pkg').version,
   });
 });
+
+app.use('/api/v1/files', clientsRoute);
 
 app.get('*', (req, res) => {
   res.status(404).json({
