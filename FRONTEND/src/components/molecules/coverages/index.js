@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-import { getDataByCliente, getData } from '../../../api';
-import { useIsFocused } from '@react-navigation/native';
+import { getDataByCliente } from '../../../api';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { Styles } from './style';
 
 const Coverages = () => {
   const [data, setData] = useState([]);
-  const isFocused = useIsFocused();
 
-  const getCoverages = async () => {
-    const cliente = 300012046;
+  const getCoverage = async cliente => {
     try {
       const myData = await getDataByCliente(cliente);
       setData(myData);
@@ -19,24 +17,31 @@ const Coverages = () => {
     }
   };
 
+  const handleOnChangeClient = inputValue => {
+    const cliente = Number(inputValue);
+    setData(cliente);
+  };
+
   const handleOnPress = () => {
+    getCoverage(data);
     console.log(JSON.stringify(data.clients));
   };
 
-  /*
-    useEffect(() => {
-    getCoverages();
-  }, [isFocused]);
-  */
-
   return (
-    <View style={Styles.container}>
-      <Text>Cliente: </Text>
-      <TextInput style={Styles.input}>asd</TextInput>
-      <TouchableOpacity style={Styles.customBtnBG} onPress={handleOnPress}>
-        <Text style={Styles.customBtnText}>ok</Text>
-      </TouchableOpacity>
-    </View>
+    <Fragment>
+      <View style={Styles.container}>
+        <TextInput
+          style={Styles.input}
+          onChangeText={handleOnChangeClient}
+          placeholder="Ingrese cliente"
+        />
+        <TouchableOpacity style={Styles.customBtnBG} onPress={handleOnPress}>
+          <Text style={Styles.customBtnText}>
+            <Ionicons name="enter-outline" size={20} />
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </Fragment>
   );
 };
 
