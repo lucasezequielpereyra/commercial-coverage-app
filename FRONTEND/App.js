@@ -8,7 +8,7 @@ import {
 import { colors } from './src/utils/colors';
 
 import Header from './src/components/atoms/header/index';
-import AppNavigation from './src/navigation/index';
+import Login from './src/views/login/index';
 
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
           barStyle="light-content"
         />
         <Header />
-        <AppNavigation />
+        <Login />
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -28,6 +28,7 @@ const App = () => {
 const Styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
 });
 export default App;

@@ -6,7 +6,7 @@ import CoverageNavigation from './coverages/index';
 
 const BottomTabs = createBottomTabNavigator();
 
-const AppNavigation = () => {
+const AppNavigation = ({ user }) => {
   return (
     <NavigationContainer>
       <BottomTabs.Navigator

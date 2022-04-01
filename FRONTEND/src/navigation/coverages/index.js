@@ -1,6 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CoverageScreen from '../../views/CoverageScreen/index';
+import CoverageScreen from '../../views/coverage/index';
 
 const Stack = createNativeStackNavigator();
 
