@@ -12,6 +12,7 @@
   "author": "Lucas Pereyra",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.26.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
     "convert-excel-to-json": "^1.7.0",
