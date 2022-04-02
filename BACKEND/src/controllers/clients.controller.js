@@ -1,5 +1,6 @@
 import Client from '../models/client.model';
 import excelToJson from 'convert-excel-to-json';
+import fs from 'fs';
 
 export const newFile = (req, res) => {
   try {
@@ -15,6 +16,13 @@ export const newFile = (req, res) => {
 
     /*           PARSEO DE JSON           */
     const resultArray = Object.values(result);
+
+    /*            FILE DELETE             */
+    try {
+      fs.unlinkSync(filePath);
+    } catch (error) {
+      console.log(error);
+    }
 
     /*            GUARDADO EN DB           */
     resultArray[0].map(res => {
