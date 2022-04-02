@@ -17,14 +17,14 @@ export const Styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    flexGrow: 0.08,
+    flexGrow: 0.09,
     width: width * 0.9,
-    height: height * 0.1,
     alignSelf: 'center',
     borderColor: '#fff',
     borderBottomColor: colors.primaryVariant,
     borderWidth: 1,
     padding: 0,
+    textAlign: 'center',
   },
   customBtnBG: {
     flex: 1,

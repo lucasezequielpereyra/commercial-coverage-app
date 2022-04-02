@@ -24,6 +24,7 @@ const Login = ({
           style={Styles.input}
           placeholder="Contraseña"
           onChangeText={handleOnChangePassword}
+          secureTextEntry={true}
         />
         <TouchableOpacity style={Styles.customBtnBG} onPress={handleOnPress}>
           <Text style={Styles.customBtnText}>INGRESAR</Text>

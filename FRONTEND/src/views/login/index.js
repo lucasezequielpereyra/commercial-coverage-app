@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from 'react';
+import { Alert } from 'react-native';
 import Login from '../../components/molecules/login/index';
 import AppNavigation from '../../navigation/index';
+import { signIn } from '../../api';
 
 const LoginScreen = () => {
   const [user, setUser] = useState('');
@@ -16,9 +18,19 @@ const LoginScreen = () => {
   };
 
   const handleOnPress = () => {
-    if (user && password) {
-      setLogin(true);
-    }
+    signIn(user, password)
+      .then(res => {
+        if (res.status === 200) {
+          setLogin(true);
+        } else {
+          Alert.alert('Error', 'Verifique los datos de usuario', [
+            { text: 'OK' },
+          ]);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   let content = !login ? (
