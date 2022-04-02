@@ -1,7 +1,7 @@
-const API = 'http://192.168.0.23:3000/api/v1/files';
+const API = 'http://192.168.0.23:3000/api/v1';
 
 export const getData = async () => {
-  const res = await fetch(`${API}/getAll`, {
+  const res = await fetch(`${API}/files/getAll`, {
     method: 'GET',
   });
 
@@ -9,9 +9,25 @@ export const getData = async () => {
 };
 
 export const getDataByCliente = async cliente => {
-  const res = await fetch(`${API}/getByCliente/${cliente}`, {
+  const res = await fetch(`${API}/files/getByCliente/${cliente}`, {
     method: 'GET',
   });
 
   return await res.json();
+};
+
+export const signIn = async (username, password) => {
+  const res = await fetch(`${API}/auth/signIn`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  });
+
+  return { token: await res.json(), status: res.status };
 };
