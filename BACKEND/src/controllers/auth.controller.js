@@ -6,11 +6,10 @@ const SECRET_WORD = process.env.SECRET_WORD;
 
 export const signUp = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, password } = req.body;
 
     const newUser = new User({
       username,
-      email,
       password: await User.encryptPassword(password),
     });
 
@@ -31,9 +30,9 @@ export const signUp = async (req, res) => {
 
 export const signIn = async (req, res) => {
   try {
-    const userFound = await User.findOne({ email: req.body.email }).populate(
-      'roles',
-    );
+    const userFound = await User.findOne({
+      username: req.body.username,
+    }).populate('roles');
 
     if (userFound) {
       const matchPassword = await User.comparePassword(

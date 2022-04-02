@@ -11,7 +11,6 @@ router.post(
     authJwt.isAdmin,
     verifiySignUp.verifyRolesExist,
     verifiySignUp.verifiyUsernameExist,
-    verifiySignUp.verifiyEmailExist,
   ],
   userCtrl.createUser,
 );

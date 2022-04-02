@@ -3,11 +3,10 @@ import Role from '../models/role.model';
 
 export const createUser = async (req, res) => {
   try {
-    const { username, email, password, roles } = req.body;
+    const { username, password, roles } = req.body;
 
     const newUser = new User({
       username,
-      email,
       password: await User.encryptPassword(password),
     });
 
@@ -40,7 +39,7 @@ export const getUsersById = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { username, email, password, roles } = req.body;
+  const { username, password, roles } = req.body;
   let foundRoles;
   /*  Search Roles  */
   if (roles) {
@@ -51,7 +50,6 @@ export const updateUser = async (req, res) => {
     { _id: id },
     {
       username: username,
-      email: email,
       password: await User.encryptPassword(password),
       roles: foundRoles,
     },

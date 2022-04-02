@@ -36,17 +36,3 @@ export const verifiyUsernameExist = async (req, res, next) => {
     res.status(500).json({ error });
   }
 };
-
-export const verifiyEmailExist = async (req, res, next) => {
-  try {
-    const user = await User.findOne({ email: req.body.email });
-    if (user) {
-      return res.status(400).json({
-        message: `Email ${req.body.email} already exist`,
-      });
-    }
-    next();
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-};
