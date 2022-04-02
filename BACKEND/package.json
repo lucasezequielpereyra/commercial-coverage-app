@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src --out-dir build",
-    "dev": "nodemon --exec ./node_modules/.bin/babel-node index.js",
+    "dev": "nodemon --exec ./node_modules/.bin/babel-node src/index.js",
     "start": "node build/index.js"
   },
   "keywords": [],
   "author": "Lucas Pereyra",
   "license": "ISC",
   "dependencies": {
+    "@babel/runtime": "^7.17.8",
     "axios": "^0.26.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
@@ -28,6 +29,7 @@
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.8",
     "@babel/node": "^7.16.8",
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "nodemon": "^2.0.15"
   }
