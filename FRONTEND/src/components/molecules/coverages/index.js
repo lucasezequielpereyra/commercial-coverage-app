@@ -1,32 +1,11 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-import { getDataByCliente } from '../../../api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import ClientItem from '../../atoms/clientItem';
 
 import { Styles } from './style';
 
-const Coverages = () => {
-  const [data, setData] = useState([]);
-
-  const getCoverage = async cliente => {
-    try {
-      const myData = await getDataByCliente(cliente);
-      setData(myData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleOnChangeClient = inputValue => {
-    const cliente = Number(inputValue);
-    setData(cliente);
-  };
-
-  const handleOnPress = () => {
-    getCoverage(data);
-    console.log(JSON.stringify(data.clients));
-  };
-
+const Coverages = ({ data, render, handleOnChangeClient, handleOnPress }) => {
   return (
     <Fragment>
       <View style={Styles.container}>
@@ -39,6 +18,18 @@ const Coverages = () => {
           <Text style={Styles.customBtnText}>
             <Ionicons name="enter-outline" size={20} />
           </Text>
+        </TouchableOpacity>
+      </View>
+      {render && <ClientItem data={data} />}
+      <View style={Styles.containerButton}>
+        <TouchableOpacity style={Styles.customBtnCov}>
+          <Text style={Styles.customTextCov}>TODAS</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={Styles.customBtnCov}>
+          <Text style={Styles.customTextCov}>KOFRE</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={Styles.customBtnCov}>
+          <Text style={Styles.customTextCov}>SALARIAL</Text>
         </TouchableOpacity>
       </View>
     </Fragment>

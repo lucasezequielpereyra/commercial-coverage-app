@@ -8,7 +8,7 @@ export const Styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.primaryVariant,
-    height: height * 0.08,
+    height: height * 0.07,
   },
   text: {
     fontSize: 25,
