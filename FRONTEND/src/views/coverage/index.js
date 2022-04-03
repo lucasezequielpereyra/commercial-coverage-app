@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Alert } from 'react-native';
 import { getDataByCliente } from '../../api';
+import { useSelector } from 'react-redux';
 
 import Coverages from '../../components/molecules/coverages/index';
 import SubHeader from '../../components/atoms/subheader';
@@ -9,6 +10,8 @@ const CovarageScreen = () => {
   const [input, setInput] = useState('');
   const [data, setData] = useState([]);
   const [render, setRender] = useState(false);
+
+  const { userToken } = useSelector(state => state.user);
 
   const getCoverage = async cliente => {
     try {

@@ -3,14 +3,18 @@ import { Alert } from 'react-native';
 import Login from '../../components/molecules/login/index';
 import AppNavigation from '../../navigation/index';
 import { signIn } from '../../api';
+// redux
+import { dataUser } from '../../store/slices/user';
+import { useDispatch } from 'react-redux';
 
 const LoginScreen = () => {
-  const [user, setUser] = useState('');
+  const [user, setUserState] = useState('');
   const [password, setPassowrd] = useState('');
   const [login, setLogin] = useState(false);
+  const dispatch = useDispatch();
 
   const handleOnChangeUser = inputValue => {
-    setUser(inputValue);
+    setUserState(inputValue);
   };
 
   const handleOnChangePassword = inputValue => {
@@ -22,6 +26,7 @@ const LoginScreen = () => {
       .then(res => {
         if (res.status === 200) {
           setLogin(true);
+          dispatch(dataUser(res.token.token));
         } else {
           Alert.alert('Error', 'Verifique los datos de usuario', [
             { text: 'OK' },
