@@ -8,12 +8,16 @@ export const getData = async () => {
   return await res.json();
 };
 
-export const getDataByCliente = async cliente => {
+export const getDataByCliente = async (cliente, userToken) => {
   const res = await fetch(`${API}/files/getByCliente/${cliente}`, {
     method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': userToken,
+    },
   });
 
-  return await res.json();
+  return { data: await res.json(), status: res.status };
 };
 
 export const signIn = async (username, password) => {

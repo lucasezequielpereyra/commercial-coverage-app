@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
-import ClientData from '../clientData';
+import ClientData from '../../atoms/clientData';
 
 const ClientItem = ({ data }) => {
   const myData = [

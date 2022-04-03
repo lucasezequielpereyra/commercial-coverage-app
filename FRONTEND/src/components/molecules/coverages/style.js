@@ -33,7 +33,7 @@ export const Styles = StyleSheet.create({
   containerButton: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginTop: '5%',
+    marginTop: '7%',
   },
   customBtnCov: {
     backgroundColor: colors.primaryVariant,
