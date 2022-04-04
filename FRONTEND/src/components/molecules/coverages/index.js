@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ClientItem from '../clientItem';
-
+import { colors } from '../../../utils/colors';
 import { Styles } from './style';
 
 const Coverages = ({
@@ -51,6 +51,7 @@ const Coverages = ({
           style={Styles.input}
           onChangeText={handleOnChangeClient}
           placeholder="Ingrese cliente"
+          placeholderTextColor={colors.grey}
         />
         <TouchableOpacity style={Styles.customBtnBG} onPress={handleOnPress}>
           <Text style={Styles.customBtnText}>

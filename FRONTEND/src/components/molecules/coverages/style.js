@@ -12,12 +12,14 @@ export const Styles = StyleSheet.create({
   input: {
     width: width * 0.6,
     height: height * 0.06,
-    fontSize: 20,
     borderColor: '#fff',
     borderBottomColor: colors.primaryVariant,
     borderBottomWidth: 1,
     padding: 0,
     textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: colors.primaryVariant,
   },
   customBtnBG: {
     backgroundColor: colors.primaryVariant,
