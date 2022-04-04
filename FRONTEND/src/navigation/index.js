@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { colors } from '../utils/colors';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import CoverageNavigation from './coverages/index';
 
@@ -11,8 +13,24 @@ const AppNavigation = () => {
     <NavigationContainer>
       <BottomTabs.Navigator
         initialRouteName="Coberturas"
-        screenOptions={{ headerShown: false }}>
-        <BottomTabs.Screen name="Coberturas" component={CoverageNavigation} />
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            backgroundColor: colors.primaryVariant,
+            borderTopColor: 'transparent',
+          },
+        }}>
+        <BottomTabs.Screen
+          name="Coberturas"
+          component={CoverageNavigation}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <Ionicons name="home-outline" size={20} color={'#fff'} />
+            ),
+            title: 'Coberturas',
+            tabBarActiveTintColor: '#fff',
+          }}
+        />
       </BottomTabs.Navigator>
     </NavigationContainer>
   );
