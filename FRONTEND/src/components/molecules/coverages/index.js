@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ClientItem from '../clientItem';
 import { colors } from '../../../utils/colors';
@@ -11,6 +11,7 @@ const Coverages = ({
   handleOnChangeClient,
   handleOnPress,
   navigation,
+  inputClientRef,
 }) => {
   const [buttonCov, setButtonCov] = useState(false);
   const [buttonKofre, setButtonKofre] = useState(false);
@@ -41,6 +42,10 @@ const Coverages = ({
           break;
       }
       return;
+    } else {
+      Alert.alert('Error', 'No se ha seleccionado ningún cliente', [
+        { text: 'OK', onPress: () => inputClientRef.current.focus() },
+      ]);
     }
   };
 
@@ -52,10 +57,14 @@ const Coverages = ({
           onChangeText={handleOnChangeClient}
           placeholder="Ingrese cliente"
           placeholderTextColor={colors.grey}
+          keyboardType="numeric"
+          onSubmitEditing={handleOnPress}
+          returnKeyType="search"
+          ref={inputClientRef}
         />
         <TouchableOpacity style={Styles.customBtnBG} onPress={handleOnPress}>
           <Text style={Styles.customBtnText}>
-            <Ionicons name="enter-outline" size={20} />
+            <Ionicons name="search-sharp" size={20} />
           </Text>
         </TouchableOpacity>
       </View>

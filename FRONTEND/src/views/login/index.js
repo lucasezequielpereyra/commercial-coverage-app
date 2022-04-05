@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 import { Alert } from 'react-native';
 import Login from '../../components/molecules/login/index';
 import AppNavigation from '../../navigation/index';
@@ -11,6 +11,8 @@ const LoginScreen = () => {
   const [user, setUserState] = useState('');
   const [password, setPassowrd] = useState('');
   const [login, setLogin] = useState(false);
+  const inputUser = useRef();
+  const inputPassowrd = useRef();
   const dispatch = useDispatch();
 
   const handleOnChangeUser = inputValue => {
@@ -29,7 +31,7 @@ const LoginScreen = () => {
           dispatch(dataUser(res.token.token));
         } else {
           Alert.alert('Error', 'Verifique los datos de usuario', [
-            { text: 'OK' },
+            { text: 'OK', onPress: () => inputUser.current.focus() },
           ]);
         }
       })
@@ -43,6 +45,8 @@ const LoginScreen = () => {
       handleOnChangeUser={handleOnChangeUser}
       handleOnChangePassword={handleOnChangePassword}
       handleOnPress={handleOnPress}
+      inputUser={inputUser}
+      inputPassowrd={inputPassowrd}
     />
   ) : (
     <AppNavigation />

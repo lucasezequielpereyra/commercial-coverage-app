@@ -1,4 +1,4 @@
-const API = 'http://192.168.0.23:3000/api/v1';
+const API = 'http://192.168.0.23:3001/api/v1';
 
 export const getData = async () => {
   const res = await fetch(`${API}/files/getAll`, {

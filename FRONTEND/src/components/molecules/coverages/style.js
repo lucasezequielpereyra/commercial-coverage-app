@@ -18,7 +18,7 @@ export const Styles = StyleSheet.create({
     padding: 0,
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 18,
     color: colors.primaryVariant,
   },
   customBtnBG: {
@@ -36,6 +36,8 @@ export const Styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginTop: '7%',
+    width: width,
+    backgroundColor: colors.primaryVariant,
   },
   customBtnCov: {
     backgroundColor: colors.primaryVariant,

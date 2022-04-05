@@ -5,6 +5,7 @@ import { colors } from '../utils/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import CoverageNavigation from './coverages/index';
+import PriceNavigation from './prices/index';
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -16,7 +17,7 @@ const AppNavigation = () => {
         screenOptions={{
           headerShown: false,
           tabBarStyle: {
-            backgroundColor: colors.primaryVariant,
+            backgroundColor: colors.primaryColor,
             borderTopColor: 'transparent',
           },
         }}>
@@ -25,9 +26,20 @@ const AppNavigation = () => {
           component={CoverageNavigation}
           options={{
             tabBarIcon: ({ focused }) => (
-              <Ionicons name="home-outline" size={20} color={'#fff'} />
+              <Ionicons name="home-sharp" size={20} color={'#fff'} />
             ),
             title: 'Coberturas',
+            tabBarActiveTintColor: '#fff',
+          }}
+        />
+        <BottomTabs.Screen
+          name="Precios"
+          component={PriceNavigation}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <Ionicons name="logo-usd" size={22} color={'#fff'} />
+            ),
+            title: 'Precios',
             tabBarActiveTintColor: '#fff',
           }}
         />

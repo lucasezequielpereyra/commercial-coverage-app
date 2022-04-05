@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Alert } from 'react-native';
 import { getDataByCliente } from '../../api';
 import { useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ const CovarageScreen = ({ navigation }) => {
   const [input, setInput] = useState('');
   const [data, setData] = useState([]);
   const [render, setRender] = useState(false);
+  const inputClientRef = useRef();
 
   const { userToken } = useSelector(state => state.user);
 
@@ -23,8 +24,10 @@ const CovarageScreen = ({ navigation }) => {
         Alert.alert('Error', 'No tiene permisos para ver esta información');
         setRender(false);
       } else {
-        Alert.alert('Error', 'El cliente ingresado no es valido');
         setRender(false);
+        Alert.alert('Error', 'El cliente ingresado no es valido', [
+          { text: 'OK', onPress: () => inputClientRef.current.focus() },
+        ]);
       }
     } catch (error) {
       console.log(error);
@@ -49,6 +52,7 @@ const CovarageScreen = ({ navigation }) => {
         handleOnChangeClient={handleOnChangeClient}
         handleOnPress={handleOnPress}
         navigation={navigation}
+        inputClientRef={inputClientRef}
       />
     </View>
   );
