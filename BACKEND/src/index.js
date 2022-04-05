@@ -2,7 +2,7 @@ import 'dotenv/config';
 import app from './app';
 import { dbConnect } from './config/mongo';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 dbConnect();
 app.listen(PORT, () => {
