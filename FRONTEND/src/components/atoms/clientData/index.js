@@ -5,12 +5,14 @@ import { Styles } from './style';
 const ClientData = ({ data }) => {
   const renderData = () => {
     return data.map((item, index) => {
-      return (
-        <View key={index} style={Styles.container}>
-          <Text style={Styles.label}>{Object.keys(item)}: </Text>
-          <Text style={Styles.value}>{Object.values(item)}</Text>
-        </View>
-      );
+      if (item[0] !== '_id') {
+        return (
+          <View key={index} style={Styles.container}>
+            <Text style={Styles.label}>{item[0]}: </Text>
+            <Text style={Styles.value}>{item[1]}</Text>
+          </View>
+        );
+      }
     });
   };
 

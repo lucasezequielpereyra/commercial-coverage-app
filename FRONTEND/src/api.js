@@ -1,22 +1,24 @@
 const API = 'http://192.168.0.23:3001/api/v1';
 
-export const getData = async () => {
-  const res = await fetch(`${API}/files/getAll`, {
-    method: 'GET',
-  });
-
-  return await res.json();
-};
-
 export const getDataByCliente = async (cliente, userToken) => {
-  const res = await fetch(`${API}/files/getByCliente/${cliente}`, {
+  const res = await fetch(`${API}/files/getByClient/${cliente}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       'x-access-token': userToken,
     },
   });
+  return { data: await res.json(), status: res.status };
+};
 
+export const getCoveragesByClient = async (cliente, userToken) => {
+  const res = await fetch(`${API}/files/getCoveragesByClient/${cliente}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': userToken,
+    },
+  });
   return { data: await res.json(), status: res.status };
 };
 

@@ -1,7 +1,8 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ClientItem from '../clientItem';
+
 import { colors } from '../../../utils/colors';
 import { Styles } from './style';
 
@@ -12,30 +13,21 @@ const Coverages = ({
   handleOnPress,
   navigation,
   inputClientRef,
+  getCoverages,
+  coverages,
+  clientNro,
 }) => {
-  const [buttonCov, setButtonCov] = useState(false);
-  const [buttonKofre, setButtonKofre] = useState(false);
-  const [buttonSalarial, setButtonSalarial] = useState(false);
-
   const handleOnPressCov = button => {
     if (render) {
       switch (button) {
         case 'cov':
-          setButtonCov(!buttonCov);
-          setButtonKofre(false);
-          setButtonSalarial(false);
-          navigation.navigate('AllCoveragesScreen', { data: data });
+          getCoverages(clientNro);
+          navigation.navigate('AllCoveragesScreen', { data: coverages });
           break;
         case 'kofre':
-          setButtonCov(false);
-          setButtonKofre(!buttonKofre);
-          setButtonSalarial(false);
           navigation.navigate('KofreScreen', { data: data });
           break;
         case 'salarial':
-          setButtonCov(false);
-          setButtonKofre(false);
-          setButtonSalarial(!buttonSalarial);
           navigation.navigate('SalarialScreen', { data: data });
           break;
         default:

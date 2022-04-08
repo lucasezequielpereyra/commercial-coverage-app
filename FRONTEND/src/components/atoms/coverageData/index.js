@@ -16,11 +16,11 @@ const CoverageData = ({ data }) => {
       )}
       renderItem={({ item }) => (
         <View style={Styles.container}>
-          <Text style={Styles.label}>{item.key}</Text>
-          {item.data === 1 && (
+          <Text style={Styles.label}>{item[0]}</Text>
+          {item[1] === 1 && (
             <Ionicons name="checkmark-sharp" style={Styles.value} />
           )}
-          {item.data === 0 && (
+          {item[1] === 0 && (
             <Ionicons name="close-sharp" style={Styles.value} />
           )}
         </View>
