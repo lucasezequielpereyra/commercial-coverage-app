@@ -2,52 +2,64 @@ import { Schema, model } from 'mongoose';
 
 const clientSchema = new Schema(
   {
-    cliente: {
+    Cliente: {
       type: Number,
     },
-    razon_social: {
+    OV: {
       type: String,
     },
-    direccion: {
+    RazonSocial: {
       type: String,
     },
-    canal: {
+    Direccion: {
       type: String,
     },
-    gec: {
+    Canal: {
       type: String,
     },
-    nse: {
-      tpye: String,
-    },
-    zona: {
+    GEC: {
       type: String,
     },
-    pr: {
+    NSE: {
       type: String,
     },
-    tg: {
+    Zona: {
       type: String,
     },
-    ice: {
+    Ruta_PR: {
       type: String,
     },
-    tamaño_ice: {
+    Ruta_TV: {
       type: String,
     },
-    visite_pr: {
-      tpye: String,
-    },
-    visite_ej: {
+    Ruta_WAPP: {
       type: String,
     },
-    ritmo_ej: {
+    Ruta_WEB: {
       type: String,
     },
-    modalidad: {
+    TG: {
       type: String,
     },
-    coberturas: {}, // not defined because the coverages are dynamic
+    ICE: {
+      type: String,
+    },
+    Tamano_ICE: {
+      type: String,
+    },
+    Visita_PR: {
+      type: String,
+    },
+    Visita_EJ: {
+      type: String,
+    },
+    Ritmo_EJ: {
+      type: String,
+    },
+    Modalidad: {
+      type: String,
+    },
+    Coberturas: {},
   },
   {
     versionKey: false,

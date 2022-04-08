@@ -9,21 +9,23 @@ const router = Router();
 router.get('/getAll', clientsCtrl.getAll);
 
 router.get(
-  '/getByCliente/:cliente',
+  '/getByClient/:client',
   [jwtCtrl.verifyToken, jwtCtrl.isComer],
-  clientsCtrl.getByCliente,
+  clientsCtrl.getCustomDataByClient,
 );
 
 router.get(
-  '/getByZona/:zona',
-  [jwtCtrl.verifyToken, jwtCtrl.isEjecutivo],
-  clientsCtrl.getByZona,
+  '/getCoveragesByClient/:client',
+  [jwtCtrl.verifyToken, jwtCtrl.isComer],
+  clientsCtrl.getCoveragesByClient,
 );
 
-router.post(
-  '/newFile',
-  [upload.single('file'), jwtCtrl.verifyToken, jwtCtrl.isBackoffice],
-  clientsCtrl.newFile,
+router.get(
+  '/getByZone/:zone',
+  [jwtCtrl.verifyToken, jwtCtrl.isEjecutivo],
+  clientsCtrl.getByZone,
 );
+
+router.post('/newFile', [upload.single('file')], clientsCtrl.newFile);
 
 export default router;

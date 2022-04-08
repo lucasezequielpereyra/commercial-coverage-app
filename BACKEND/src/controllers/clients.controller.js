@@ -4,7 +4,7 @@ import fs from 'fs';
 
 export const newFile = (req, res) => {
   try {
-    /*          PARSEO DE ARCHIVO           */
+    /*              FILE PARSE            */
     const file = req.file;
     const filePath = file.path;
     const result = excelToJson({
@@ -14,64 +14,73 @@ export const newFile = (req, res) => {
       },
     });
 
-    /*           PARSEO DE JSON           */
+    /*             JSON PARSE              */
     const resultArray = Object.values(result);
 
     /*            FILE DELETE             */
-    try {
-      fs.unlinkSync(filePath);
-    } catch (error) {
-      console.log(error);
-    }
+    fs.unlinkSync(filePath, err => {
+      if (err) {
+        console.log(err);
+      }
+    });
 
-    /*            GUARDADO EN DB           */
+    /*           DROP COLLECTION            */
+    Client.collection.drop(err => {
+      if (err) {
+        console.log(err);
+      }
+    });
+
+    /*            SAVE COLLECTION           */
     resultArray[0].map(res => {
-      const client = new Client({
-        cliente: res.A,
-        razon_social: res.B,
-        direccion: res.C,
-        canal: res.D,
-        gec: res.E,
-        nse: res.F,
-        zona: res.G,
-        pr: res.H,
-        tg: res.I,
-        ice: res.J,
-        tamaño_ice: res.K,
-        visite_pr: res.L,
-        visite_ej: res.M,
-        ritmo_ej: res.N,
-        modalidad: res.O,
-        coberturas: {
-          CCTM: res.P,
-          CCSO_REFPET__RGB: res.Q,
-          CCSO_175_225: res.R,
-          FN_175_REFPET: res.S,
-          FRESH_CF: res.T,
-          CCSO_237_500: res.U,
-          CCSA_220_500: res.V,
-          FN_220_500: res.W,
-          SMART_KIN_SG_CP: res.X,
-          CCSAREFPET_CCL175: res.Y,
-          SP_175_REFPET: res.Z,
-          SP_225: res.AA,
-          CCS_175: res.AB,
-          SP_220_500: res.AC,
-          CCS225_CCL_225: res.AD,
-          CEPITA200_FRESH500: res.AE,
-          CEPITA1L_AQ225: res.AF,
-          KIN225_SMART15: res.AG,
-          POWERADE_500_995: res.AH,
-          ADES: res.AI,
-          CCSO_CCSA_500: res.AJ,
-          FN_SP_OW: res.AK,
-          FRESH_CF: res.AL,
-          FN_POMELO: res.AM,
-          SMART: res.AN,
-          PET_220_237: res.AO,
+      Client.create({
+        Cliente: res.A,
+        OV: res.B,
+        RazonSocial: res.C,
+        Direccion: res.D,
+        Canal: res.E,
+        GEC: res.F,
+        NSE: res.G,
+        Zona: res.H,
+        Ruta_PR: res.I,
+        Ruta_TV: res.J,
+        Ruta_WAPP: res.K,
+        Ruta_WEB: res.L,
+        TG: res.M,
+        ICE: res.N,
+        Tamano_ICE: res.O,
+        Visita_PR: res.P,
+        Visita_EJ: res.Q,
+        Ritmo_EJ: res.R,
+        Modalidad: res.S,
+        Coberturas: {
+          CCTM: res.T,
+          'CCSO RP / CCSO RGB': res.U,
+          'CCSO 1.75 / 2.25': res.V,
+          'FN 1.75 / FN RP': res.W,
+          'FRESH CF': res.X,
+          'CCSO 237 / 500': res.Y,
+          'CCSA 237 / 500': res.Z,
+          'FN 237 / 500': res.AA,
+          'SMART / KIN CP SG': res.AB,
+          'CCSA RP / CCL 1.75': res.AC,
+          'SP 1.75 / SP RP': res.AD,
+          'SP 2.25': res.AE,
+          'CCSA 1.75': res.AF,
+          'SP 220 / 500': res.AG,
+          'CCSA 2.25 / CCL 2.25': res.AH,
+          'CEPITA 200 / FRESH 500': res.AI,
+          'CEPITA 1LT / AQ 2.25': res.AJ,
+          'KIN 2.25 / SMART 1.5': res.AK,
+          'PWD 500/995': res.AL,
+          ADES: res.AM,
+          'CCSO / CCSA 500': res.AN,
+          'SP / FN OW': res.AO,
+          'FN / SP RP': res.AQ,
+          SMARTWATER: res.AR,
+          'COCA COLA BYTE': res.AS,
         },
       });
-      client.save();
     });
 
     res.status(201).json({
@@ -103,9 +112,32 @@ export const getAll = (req, res) => {
   });
 };
 
-export const getByCliente = (req, res) => {
-  const cliente = req.params.cliente;
-  Client.findOne({ cliente: cliente }, (err, client) => {
+// Custom data by client
+export const getCustomDataByClient = (req, res) => {
+  const cliente = req.params.client;
+  Client.findOne(
+    { Cliente: cliente },
+    'Cliente RazonSocial Direccion Canal GEC',
+    (err, client) => {
+      if (err) {
+        return res.status(500).json({
+          ok: false,
+          mensaje: 'Error loaded client',
+          errors: err,
+        });
+      }
+      res.status(200).json({
+        ok: true,
+        client: client,
+      });
+    },
+  );
+};
+
+// Get all coverages by client
+export const getCoveragesByClient = (req, res) => {
+  const cliente = req.params.client;
+  Client.findOne({ Cliente: cliente }, 'Coberturas', (err, client) => {
     if (err) {
       return res.status(500).json({
         ok: false,
@@ -113,14 +145,15 @@ export const getByCliente = (req, res) => {
         errors: err,
       });
     }
+    const coverages = client.Coberturas;
     res.status(200).json({
       ok: true,
-      clients: client,
+      coverages: coverages,
     });
   });
 };
 
-export const getByZona = (req, res) => {
+export const getByZone = (req, res) => {
   const zona = req.params.zona;
   Client.find({ zona: zona }, (err, clients) => {
     if (err) {
