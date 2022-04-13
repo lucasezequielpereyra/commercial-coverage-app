@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, ScrollView } from 'react-native';
-import { getKofreCoveragesByClient } from '../../api';
+import { getIceCoveragesByClient } from '../../api';
 import { useSelector } from 'react-redux';
 import CoverageData from '../../components/atoms/coverageData';
 
-const KofreScreen = ({ route }) => {
+const IceScreen = ({ route }) => {
   const { client } = route.params;
   const [coverages, setCoverages] = useState([]);
   const { userToken } = useSelector(state => state.user);
@@ -12,7 +12,7 @@ const KofreScreen = ({ route }) => {
   useEffect(() => {
     const data = async () => {
       try {
-        const myData = await getKofreCoveragesByClient(client, userToken);
+        const myData = await getIceCoveragesByClient(client, userToken);
         if (myData.status === 200) {
           setCoverages(myData.data.coverages);
         } else {
@@ -34,4 +34,4 @@ const KofreScreen = ({ route }) => {
   );
 };
 
-export default KofreScreen;
+export default IceScreen;

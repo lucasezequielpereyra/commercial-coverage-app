@@ -12,23 +12,30 @@ const Coverages = ({
   handleOnChangeClient,
   handleOnPress,
   navigation,
-  inputClientRef,
-  getCoverages,
-  coverages,
   clientNro,
 }) => {
   const handleOnPressCov = button => {
     if (render) {
       switch (button) {
         case 'cov':
-          getCoverages(clientNro);
-          navigation.navigate('AllCoveragesScreen', { data: coverages });
+          navigation.navigate('AllCoveragesScreen', {
+            client: clientNro,
+          });
           break;
         case 'kofre':
-          navigation.navigate('KofreScreen', { data: data });
+          navigation.navigate('KofreScreen', {
+            client: clientNro,
+          });
+          break;
+        case 'ice':
+          navigation.navigate('IceScreen', {
+            client: clientNro,
+          });
           break;
         case 'salarial':
-          navigation.navigate('SalarialScreen', { data: data });
+          navigation.navigate('SalarialScreen', {
+            client: clientNro,
+          });
           break;
         default:
           break;
@@ -36,7 +43,7 @@ const Coverages = ({
       return;
     } else {
       Alert.alert('Error', 'No se ha seleccionado ningún cliente', [
-        { text: 'OK', onPress: () => inputClientRef.current.focus() },
+        { text: 'OK' },
       ]);
     }
   };
@@ -52,7 +59,6 @@ const Coverages = ({
           keyboardType="numeric"
           onSubmitEditing={handleOnPress}
           returnKeyType="search"
-          ref={inputClientRef}
         />
         <TouchableOpacity style={Styles.customBtnBG} onPress={handleOnPress}>
           <Text style={Styles.customBtnText}>
@@ -71,6 +77,11 @@ const Coverages = ({
           style={Styles.customBtnCov}
           onPress={() => handleOnPressCov('kofre')}>
           <Text style={Styles.customTextCov}>KOFRE</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={Styles.customBtnCov}
+          onPress={() => handleOnPressCov('ice')}>
+          <Text style={Styles.customTextCov}>ICE</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={Styles.customBtnCov}

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { View, Alert } from 'react-native';
-import { getDataByCliente, getCoveragesByClient } from '../../api';
+import { getDataByCliente, getKofreCoveragesByClient } from '../../api';
 import { useSelector } from 'react-redux';
 
 import Coverages from '../../components/molecules/coverages/index';
@@ -10,7 +10,6 @@ const CovarageScreen = ({ navigation }) => {
   const [input, setInput] = useState('');
   const [data, setData] = useState([]);
   const [clientNro, setClientNro] = useState('');
-  const [coverages, setCoverages] = useState([]);
   const [render, setRender] = useState(false);
   const inputClientRef = useRef();
 
@@ -28,20 +27,13 @@ const CovarageScreen = ({ navigation }) => {
       } else {
         setRender(false);
         Alert.alert('Error', 'El cliente ingresado no es valido', [
-          { text: 'OK', onPress: () => inputClientRef.current.focus() },
+          { text: 'OK' },
         ]);
       }
     } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getCoverages = async (client, option) => {
-    try {
-      const myData = await getCoveragesByClient(client, userToken);
-      setCoverages(myData.data.coverages);
-    } catch (error) {
-      console.log(error);
+      Alert.alert('Error', error, [
+        { text: 'OK', onPress: () => inputClientRef.current.focus() },
+      ]);
     }
   };
 
@@ -54,7 +46,6 @@ const CovarageScreen = ({ navigation }) => {
     getClient(input);
     setClientNro(input);
   };
-
   return (
     <View>
       <SubHeader title="COBERTURAS" />
@@ -64,9 +55,6 @@ const CovarageScreen = ({ navigation }) => {
         handleOnChangeClient={handleOnChangeClient}
         handleOnPress={handleOnPress}
         navigation={navigation}
-        inputClientRef={inputClientRef}
-        getCoverages={getCoverages}
-        coverages={coverages}
         clientNro={clientNro}
       />
     </View>

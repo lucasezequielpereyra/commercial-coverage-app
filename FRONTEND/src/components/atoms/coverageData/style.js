@@ -7,10 +7,12 @@ export const Styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
+    flexWrap: 'wrap',
     width: width,
     marginVertical: '1.3%',
   },
   label: {
+    flexWrap: 'wrap',
     width: width / 1.5,
     fontSize: width * 0.05,
     color: colors.primaryVariant,

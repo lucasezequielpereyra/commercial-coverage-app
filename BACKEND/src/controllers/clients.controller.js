@@ -34,51 +34,44 @@ export const newFile = (req, res) => {
     /*            SAVE COLLECTION           */
     resultArray[0].map(res => {
       Client.create({
-        Cliente: res.A,
-        OV: res.B,
-        RazonSocial: res.C,
-        Direccion: res.D,
-        Canal: res.E,
-        GEC: res.F,
-        NSE: res.G,
-        Zona: res.H,
-        Ruta_PR: res.I,
-        Ruta_TV: res.J,
-        Ruta_WAPP: res.K,
-        Ruta_WEB: res.L,
-        TG: res.M,
-        ICE: res.N,
-        Tamano_ICE: res.O,
-        Visita_PR: res.P,
-        Visita_EJ: res.Q,
-        Ritmo_EJ: res.R,
-        Modalidad: res.S,
+        OV: res.A,
+        Canal: res.B,
+        Zona: res.C,
+        Ruta_PR: res.D,
+        Modalidad: res.E,
+        Visita_PR: res.F,
+        Cliente: res.G,
+        RazonSocial: res.H,
+        Direccion: res.I,
+        ICE: res.J,
+        GEC: res.K,
+        Tamano_ICE: res.L,
         Coberturas: {
-          CCTM: res.T,
-          'CCSO RP / CCSO RGB': res.U,
-          'CCSO 1.75 / 2.25': res.V,
-          'FN 1.75 / FN RP': res.W,
-          'FRESH CF': res.X,
-          'CCSO 237 / 500': res.Y,
-          'CCSA 237 / 500': res.Z,
-          'FN 237 / 500': res.AA,
-          'SMART / KIN CP SG': res.AB,
-          'CCSA RP / CCL 1.75': res.AC,
-          'SP 1.75 / SP RP': res.AD,
-          'SP 2.25': res.AE,
-          'CCSA 1.75': res.AF,
-          'SP 220 / 500': res.AG,
-          'CCSA 2.25 / CCL 2.25': res.AH,
-          'CEPITA 200 / FRESH 500': res.AI,
-          'CEPITA 1LT / AQ 2.25': res.AJ,
-          'KIN 2.25 / SMART 1.5': res.AK,
-          'PWD 500/995': res.AL,
-          ADES: res.AM,
-          'CCSO / CCSA 500': res.AN,
-          'SP / FN OW': res.AO,
-          'FN / SP RP': res.AQ,
-          SMARTWATER: res.AR,
-          'COCA COLA BYTE': res.AS,
+          CCTM: res.M,
+          'CCSO RP / CCSO RGB': res.N,
+          'CCSO 1.75 / 2.25': res.O,
+          'FN 1.75 / FN RP': res.P,
+          'FRESH CF': res.Q,
+          'CCSO 237 / 500': res.R,
+          'CCSA 237 / 500': res.S,
+          'FN 237 / 500': res.T,
+          'SMART / KIN CP SG': res.U,
+          'CCSA RP / CCL 1.75': res.V,
+          'SP 1.75 / SP RP': res.W,
+          'SP 2.25': res.X,
+          'CCSA 1.75': res.Y,
+          'SP 220 / 500': res.Z,
+          'CCSA 2.25 / CCL 2.25': res.AA,
+          'CEPITA 200 / FRESH 500': res.AB,
+          'CEPITA 1LT / AQ 2.25': res.AC,
+          'KIN 2.25 / SMART 1.5': res.AD,
+          'PWD 500/995': res.AE,
+          ADES: res.AF,
+          'CCSO / CCSA 500': res.AG,
+          'SP / FN OW': res.AH,
+          'FN / SP RP': res.AI,
+          SMARTWATER: res.AJ,
+          'COCA COLA BYTE': res.AK,
         },
       });
     });
@@ -117,7 +110,7 @@ export const getCustomDataByClient = (req, res) => {
   const cliente = req.params.client;
   Client.findOne(
     { Cliente: cliente },
-    'Cliente RazonSocial Direccion Canal GEC',
+    'Cliente RazonSocial Direccion Canal GEC ICE',
     (err, client) => {
       if (err) {
         return res.status(500).json({
@@ -149,6 +142,108 @@ export const getCoveragesByClient = (req, res) => {
     res.status(200).json({
       ok: true,
       coverages: coverages,
+    });
+  });
+};
+
+// Get Kofre coverages by client
+export const getKofreCoveragesByClient = (req, res) => {
+  const cliente = req.params.client;
+  const arrayCoverages = [];
+  Client.findOne({ Cliente: cliente }, 'Coberturas', (err, client) => {
+    if (err) {
+      return res.status(500).json({
+        ok: false,
+        mensaje: 'Error loaded client',
+        errors: err,
+      });
+    }
+    const coverages = Object.entries(client.Coberturas);
+    coverages.map(coverage => {
+      if (
+        coverage[0] === 'SMART / KIN CP SG' ||
+        coverage[0] === 'SMARTWATER' ||
+        coverage[0] === 'FRESH CF' ||
+        coverage[0] === 'SP / FN OW' ||
+        coverage[0] === 'CCSO RP / CCSO RGB'
+      ) {
+        arrayCoverages.push(coverage);
+      }
+    });
+    res.status(200).json({
+      ok: true,
+      coverages: arrayCoverages,
+    });
+  });
+};
+
+// Get Ice coverages by client
+export const getIceCoveragesByClient = (req, res) => {
+  const cliente = req.params.client;
+  const arrayCoverages = [];
+  Client.findOne({ Cliente: cliente }, 'Coberturas', (err, client) => {
+    if (err) {
+      return res.status(500).json({
+        ok: false,
+        mensaje: 'Error loaded client',
+        errors: err,
+      });
+    }
+    const coverages = Object.entries(client.Coberturas);
+    coverages.map(coverage => {
+      if (
+        coverage[0] === 'CCSO RP / CCSO RGB' ||
+        coverage[0] === 'CCSO 1.75 / 2.25' ||
+        coverage[0] === 'FN 1.75 / FN RP' ||
+        coverage[0] === 'FRESH CF' ||
+        coverage[0] === 'CCSO 237 / 500' ||
+        coverage[0] === 'CCSA 237 / 500' ||
+        coverage[0] === 'FN 237 / 500' ||
+        coverage[0] === 'SMART / KIN CP SG' ||
+        coverage[0] === 'SP 1.75 / SP RP'
+      ) {
+        arrayCoverages.push(coverage);
+      }
+    });
+    res.status(200).json({
+      ok: true,
+      coverages: arrayCoverages,
+    });
+  });
+};
+
+// Get Salarial coverages by client
+export const getSalarialCoveragesByClient = (req, res) => {
+  const cliente = req.params.client;
+  const arrayCoverages = [];
+  Client.findOne({ Cliente: cliente }, 'Coberturas', (err, client) => {
+    if (err) {
+      return res.status(500).json({
+        ok: false,
+        mensaje: 'Error loaded client',
+        errors: err,
+      });
+    }
+    const coverages = Object.entries(client.Coberturas);
+    coverages.map(coverage => {
+      if (
+        coverage[0] === 'CCSO 237 / 500' ||
+        coverage[0] === 'SMART / KIN CP SG' ||
+        coverage[0] === 'CCSO 1.75 / 2.25' ||
+        coverage[0] === 'CCSA 237 / 500' ||
+        coverage[0] === 'CCSO RP / CCSO RGB' ||
+        coverage[0] === 'FN 1.75 / FN RP' ||
+        coverage[0] === 'SP 1.75 / SP RP' ||
+        coverage[0] === 'FRESH CF' ||
+        coverage[0] === 'KIN 2.25 / SMART 1.5' ||
+        coverage[0] === 'CCSA RP / CCL 1.75'
+      ) {
+        arrayCoverages.push(coverage);
+      }
+    });
+    res.status(200).json({
+      ok: true,
+      coverages: arrayCoverages,
     });
   });
 };

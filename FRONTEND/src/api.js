@@ -22,6 +22,39 @@ export const getCoveragesByClient = async (cliente, userToken) => {
   return { data: await res.json(), status: res.status };
 };
 
+export const getKofreCoveragesByClient = async (cliente, userToken) => {
+  const res = await fetch(`${API}/files/getKofreCoveragesByClient/${cliente}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': userToken,
+    },
+  });
+  return { data: await res.json(), status: res.status };
+};
+
+export const getIceCoveragesByClient = async (cliente, userToken) => {
+  const res = await fetch(`${API}/files/getIceCoveragesByClient/${cliente}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': userToken,
+    },
+  });
+  return { data: await res.json(), status: res.status };
+};
+
+export const getSalarialCoveragesByClient = async (cliente, userToken) => {
+  const res = await fetch(`${API}/files/getIceCoveragesByClient/${cliente}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': userToken,
+    },
+  });
+  return { data: await res.json(), status: res.status };
+};
+
 export const signIn = async (username, password) => {
   const res = await fetch(`${API}/auth/signIn`, {
     method: 'POST',
