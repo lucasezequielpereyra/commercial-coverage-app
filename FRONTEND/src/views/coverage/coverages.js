@@ -1,34 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, ScrollView } from 'react-native';
+import { Alert, ScrollView, ActivityIndicator } from 'react-native';
 import { getCoveragesByClient } from '../../api';
 import { useSelector } from 'react-redux';
 import CoverageData from '../../components/atoms/coverageData';
+import { colors } from '../../utils/colors';
 
-const AllCoveragesScreen = ({ route }) => {
-  const { client } = route.params;
+const useFetch = client => {
   const [coverages, setCoverages] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
+
   const { userToken } = useSelector(state => state.user);
 
   useEffect(() => {
     const data = async () => {
       try {
+        setIsFetching(true);
         const myData = await getCoveragesByClient(client, userToken);
-        if (myData.status === 200) {
-          setCoverages(Object.entries(myData.data.coverages));
-        } else {
-          Alert.alert('Error', 'No hay coberturas para este cliente');
-        }
+        setCoverages(Object.entries(myData.data.coverages));
       } catch (error) {
         Alert.alert('Error', error);
+      } finally {
+        setIsFetching(false);
       }
     };
 
     data();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [client]);
+
+  return {
+    coverages,
+    isFetching,
+  };
+};
+
+const AllCoveragesScreen = ({ route }) => {
+  const { client } = route.params;
+  const { coverages, isFetching } = useFetch(client);
 
   return (
     <ScrollView>
+      {isFetching && (
+        <ActivityIndicator size="large" color={colors.primaryColor} />
+      )}
       {coverages.length > 0 && <CoverageData data={coverages} />}
     </ScrollView>
   );

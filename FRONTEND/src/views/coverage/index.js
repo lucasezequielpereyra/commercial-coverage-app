@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { View, Alert } from 'react-native';
-import { getDataByCliente, getKofreCoveragesByClient } from '../../api';
+import { getDataByCliente } from '../../api';
 import { useSelector } from 'react-redux';
 
 import Coverages from '../../components/molecules/coverages/index';
