@@ -1,16 +1,10 @@
 import React from 'react';
-import {
-  View,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  Text,
-  ScrollView,
-} from 'react-native';
+import { View, TextInput, Image, Text, ScrollView } from 'react-native';
 import SubHeader from '../../atoms/subheader';
 import imagen from './logo.png';
 import { colors } from '../../../utils/colors';
 import { Styles } from './style';
+import { Button } from '../../atoms/button';
 
 const Login = ({
   handleOnChangeUser,
@@ -45,9 +39,9 @@ const Login = ({
           returnKeyType="done"
           ref={inputPassowrd}
         />
-        <TouchableOpacity style={Styles.customBtnBG} onPress={handleOnPress}>
+        <Button styles={Styles.customBtnBG} onPress={handleOnPress}>
           <Text style={Styles.customBtnText}>INGRESAR</Text>
-        </TouchableOpacity>
+        </Button>
       </View>
     </ScrollView>
   );

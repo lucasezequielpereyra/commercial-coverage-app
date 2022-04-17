@@ -27,7 +27,7 @@ const CovarageScreen = ({ navigation }) => {
       } else {
         setRender(false);
         Alert.alert('Error', 'El cliente ingresado no es valido', [
-          { text: 'OK' },
+          { text: 'OK', onPress: () => inputClientRef.current.focus() },
         ]);
       }
     } catch (error) {
@@ -56,6 +56,7 @@ const CovarageScreen = ({ navigation }) => {
         handleOnPress={handleOnPress}
         navigation={navigation}
         clientNro={clientNro}
+        inputClientRef={inputClientRef}
       />
     </View>
   );

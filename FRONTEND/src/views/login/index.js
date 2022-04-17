@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useRef } from 'react';
 import { Alert } from 'react-native';
+import { signIn } from '../../api';
 import Login from '../../components/molecules/login/index';
 import AppNavigation from '../../navigation/index';
-import { signIn } from '../../api';
 // redux
 import { dataUser } from '../../store/slices/user';
 import { useDispatch } from 'react-redux';

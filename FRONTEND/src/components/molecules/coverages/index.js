@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, Alert } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ClientItem from '../clientItem';
 
+import { Button } from '../../atoms/button';
 import { colors } from '../../../utils/colors';
 import { Styles } from './style';
 
@@ -13,6 +14,7 @@ const Coverages = ({
   handleOnPress,
   navigation,
   clientNro,
+  inputClientRef,
 }) => {
   const handleOnPressCov = button => {
     if (render) {
@@ -43,7 +45,7 @@ const Coverages = ({
       return;
     } else {
       Alert.alert('Error', 'No se ha seleccionado ningún cliente', [
-        { text: 'OK' },
+        { text: 'OK', onPress: () => inputClientRef.current.focus() },
       ]);
     }
   };
@@ -59,35 +61,39 @@ const Coverages = ({
           keyboardType="numeric"
           onSubmitEditing={handleOnPress}
           returnKeyType="search"
+          ref={inputClientRef}
         />
-        <TouchableOpacity style={Styles.customBtnBG} onPress={handleOnPress}>
+
+        <Button styles={Styles.customBtnBG} onPress={handleOnPress}>
           <Text style={Styles.customBtnText}>
             <Ionicons name="search-sharp" size={20} />
           </Text>
-        </TouchableOpacity>
+        </Button>
       </View>
+
       {render && <ClientItem data={data} />}
+
       <View style={Styles.containerButton}>
-        <TouchableOpacity
-          style={Styles.customBtnCov}
+        <Button
+          styles={Styles.customBtnCov}
           onPress={() => handleOnPressCov('cov')}>
           <Text style={Styles.customTextCov}>TODAS</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={Styles.customBtnCov}
+        </Button>
+        <Button
+          styles={Styles.customBtnCov}
           onPress={() => handleOnPressCov('kofre')}>
           <Text style={Styles.customTextCov}>KOFRE</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={Styles.customBtnCov}
+        </Button>
+        <Button
+          styles={Styles.customBtnCov}
           onPress={() => handleOnPressCov('ice')}>
           <Text style={Styles.customTextCov}>ICE</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={Styles.customBtnCov}
+        </Button>
+        <Button
+          styles={Styles.customBtnCov}
           onPress={() => handleOnPressCov('salarial')}>
           <Text style={Styles.customTextCov}>SALARIAL</Text>
-        </TouchableOpacity>
+        </Button>
       </View>
     </Fragment>
   );
