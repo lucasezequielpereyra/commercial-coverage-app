@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include("template/head") %>
+  <title>Backoffice - MyKOF</title>
+  <body>
+    <div class="container-header-uploads">
+      <h1> Bienvenidx, <%=user %></h1>
+      <img src="/assets/logo.png" alt="Logo" class="logo-upload">
+    </div>
+    <div>
+      <form action="/api/v1/files/newFile" method="post" enctype="multipart/form-data" class="form-upload">
+        <input class="input-file" type="file" name="file" />
+        <input class="input-upload" type="submit" value="Upload" />
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,131 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+img.logo {
+  width: 17%;
+  margin-bottom: 2%;
+}
+
+.container{
+  width: 30%
+}
+
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #fe001a;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.container-bottom{
+  margin-top: 2%;
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 1.7% 3%;
+  margin-left: 5%;
+  background-color: #8D8D8D;
+}
+
+span.psw {
+  padding-top: 2.5%;
+  margin-right: 5%;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+}
+
+.container-header-uploads {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  background-color: #b10005;
+  justify-content: space-between;
+}
+
+h1 {
+  margin: 0;
+  margin-top: 1%;
+  margin-left: 1%;
+  color: rgb(240, 240, 240);
+}
+
+.logo-upload {
+  height: 80%;
+  margin-top: 0.4%;
+  margin-right: 1%;
+}
+
+.form-upload {
+  width: 50%;
+  margin-top: 1%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.input-file{
+  background-color: grey;
+  color: white;
+  padding: 1.4%;
+  border: none;
+  justify-content: 'center';
+  margin-left: 2%;
+}
+
+.input-upload {
+  background-color: #fe001a;
+  color: white;
+  padding: 1%;
+  border: none;
+  border-radius: 5%;
+  justify-content: 'center';
+  margin-left: 2%;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  width: 40%;
+}

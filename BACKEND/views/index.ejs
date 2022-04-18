@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+  <%- include("template/head") %>
+  <body>
+    <form action="/api/v1/auth/web/login" method="post" class='form-container'>
+      <img src="/assets/logo.png" alt="Logo" class="logo">
+    
+      <div class="container">
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Ingrese su usuario" name="username" required>
+    
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+            
+        <button type="submit">Ingresar</button>
+      </div>
+    
+      <div class="container-bottom" style="background-color:#f1f1f1">
+        <button type="button" class="cancelbtn">Cancel</button>
+        <span class="psw"><a href="#">¿Olvidaste la contraseña?</a></span>
+      </div>
+    </form>
+  </body>
+</html>

@@ -44,6 +44,10 @@ router.get(
   clientsCtrl.getByZone,
 );
 
-router.post('/newFile', [upload.single('file')], clientsCtrl.newFile);
+router.post(
+  '/newFile',
+  [upload.single('file'), jwtCtrl.verifyToken, jwtCtrl.isBackoffice],
+  clientsCtrl.newFile,
+);
 
 export default router;

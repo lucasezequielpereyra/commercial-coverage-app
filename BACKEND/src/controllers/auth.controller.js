@@ -22,7 +22,7 @@ export const signUp = async (req, res) => {
       expiresIn: 86400,
     });
 
-    res.status(200).json({ token });
+    res.status(201).json({ token });
   } catch (error) {
     res.status(500).json({ error });
   }
@@ -58,5 +58,47 @@ export const signIn = async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+};
+
+export const signInWeb = async (req, res) => {
+  try {
+    const userFound = await User.findOne({
+      username: req.body.username,
+    }).populate('roles');
+
+    if (userFound) {
+      const matchPassword = await User.comparePassword(
+        req.body.password,
+        userFound.password,
+      );
+
+      if (!matchPassword)
+        return res
+          .status(401)
+          .render('index', { login: false, message: 'Invalid password' });
+
+      if (!userFound)
+        return res
+          .status(400)
+          .render('index', { login: false, message: 'User not found' });
+
+      const token = jwt.sign({ id: userFound._id }, SECRET_WORD, {
+        expiresIn: 86400,
+      });
+
+      req.session.token = token;
+      req.session.user = userFound.username;
+      res.render('upload', {
+        user: req.session.user,
+        token: req.session.token,
+      });
+    } else {
+      res
+        .status(401)
+        .render('index', { login: false, message: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).render('index', { login: false, message: error.message });
   }
 };

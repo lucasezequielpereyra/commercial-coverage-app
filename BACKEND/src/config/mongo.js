@@ -9,5 +9,5 @@ export const dbConnect = () => {
       useUnifiedTopology: true,
     })
     .then(() => console.log('db is connected'))
-    .catch(error => console.log(error));
+    .catch(error => console.log(error.message));
 };
