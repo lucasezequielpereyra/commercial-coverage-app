@@ -4,7 +4,10 @@
   <title>Backoffice - MyKOF</title>
   <body>
     <div class="container-header-uploads">
-      <h1> Bienvenidx, <%=user %></h1>
+      <div class="container-user">
+        <h1> Bienvenidx, <%=user %></h1>
+        <a class='logout' href="/api/backoffice/logout">Salir</a>
+      </div>
       <img src="/assets/logo.png" alt="Logo" class="logo-upload">
     </div>
     <div>

@@ -31,7 +31,7 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
-button {
+.btn-login {
   background-color: #fe001a;
   color: white;
   padding: 14px 20px;
@@ -41,7 +41,7 @@ button {
   width: 100%;
 }
 
-button:hover {
+.btn-login:hover {
   opacity: 0.8;
 }
 
@@ -61,7 +61,7 @@ button:hover {
 }
 
 span.psw {
-  padding-top: 2.5%;
+  padding: 2.5%;
   margin-right: 5%;
 }
 
@@ -85,11 +85,38 @@ span.psw {
   justify-content: space-between;
 }
 
+.container-user{
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 h1 {
   margin: 0;
-  margin-top: 1%;
-  margin-left: 1%;
+  margin-top: 5%;
+  margin-left: 2%;
   color: rgb(240, 240, 240);
+}
+
+.logout {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(165, 139, 139);
+  color: white;
+  border: none;
+  cursor: pointer;
+  height: 50%;
+  width: 17%;
+  text-decoration: none;
+  color: white;
+  margin: auto;
+}
+
+.logout:hover {
+  opacity: 0.8;
 }
 
 .logo-upload {
@@ -128,4 +155,16 @@ h1 {
 
 input[type="file"] {
   width: 40%;
+}
+
+.container-404 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.h1-404{
+  color: #fe001a;
+  font-size: 5vh;
 }

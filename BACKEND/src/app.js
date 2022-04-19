@@ -10,6 +10,7 @@ import MongoStore from 'connect-mongo';
 import clientsRoute from './routes/clients.routes';
 import authRoute from './routes/auth.routes';
 import usersRoute from './routes/users.routes';
+import boRoute from './routes/backoffice.routes';
 
 import { createRoles } from './libs/initialSetup';
 
@@ -60,22 +61,10 @@ app.get('/', (req, res) => {
 app.use('/api/v1/files', clientsRoute);
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/users', usersRoute);
-
-app.use('/api/backoffice', (req, res) => {
-  if (req.session?.token) {
-    res.render('upload', {
-      user: req.session.user,
-      token: req.session.token,
-    });
-  } else {
-    res.render('index');
-  }
-});
+app.use('/api/backoffice', boRoute);
 
 app.get('*', (req, res) => {
-  res.status(404).json({
-    message: 'Not Found',
-  });
+  res.status(404).render('404');
 });
 
 export default app;

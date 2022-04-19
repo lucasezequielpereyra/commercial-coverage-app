@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 import User from '../models/user.model';
 import Role from '../models/role.model';
