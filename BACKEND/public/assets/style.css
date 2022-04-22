@@ -6,28 +6,40 @@ body {
   height: 100%;
 }
 
-.form-container {
+.header {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  align-items: center;
+  flex-direction: row;
+  background-color: #b10005;
+  justify-content: center;
+  padding: 0.5%;
+  margin-bottom: 2%;
 }
 
 img.logo {
   width: 17%;
-  margin-bottom: 2%;
+}
+
+
+.form-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container{
-  width: 30%
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 
 input[type=text], input[type=password] {
-  width: 100%;
+  width: 60%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin: 1px 0 3% 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -36,11 +48,10 @@ input[type=text], input[type=password] {
 .btn-login {
   background-color: #fe001a;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+  padding: 1%;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 25%;
 }
 
 .btn-login:hover {
@@ -49,26 +60,40 @@ input[type=text], input[type=password] {
 
 .container-bottom{
   margin-top: 2%;
-  width: 30%;
+  width: 50%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.cancelbtn {
-  width: auto;
-  padding: 1.7% 3%;
-  margin-left: 5%;
-  background-color: #8D8D8D;
-}
 
 span.psw {
-  padding: 2.5%;
+  padding: 1.5%;
   margin-right: 5%;
 }
 
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 720px) {
+  img.logo {
+    width: 50%;
+  }
+
+  .container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-login{
+    width: 50%;
+    padding: 3%;
+  }
+
+  .container-bottom{
+    width: 50%;
+  }
+
   span.psw {
     display: block;
     float: none;
