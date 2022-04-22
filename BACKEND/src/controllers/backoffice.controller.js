@@ -34,6 +34,7 @@ export const login = async (req, res) => {
       res.render('upload', {
         user: req.session.user,
         token: req.session.token,
+        data: '',
       });
     } else {
       res
@@ -50,6 +51,7 @@ export const render = (req, res) => {
     res.render('upload', {
       user: req.session.user,
       token: req.session.token,
+      data: '',
     });
   } else {
     res.render('index');
@@ -69,4 +71,20 @@ export const logout = (req, res) => {
   } else {
     res.redirect('/api/backoffice/');
   }
+};
+
+export const uploaded = (req, res) => {
+  res.render('upload', {
+    user: req.session.user,
+    token: req.session.token,
+    data: 'El archivo se ha subido correctamente',
+  });
+};
+
+export const errorUploaded = (req, res) => {
+  res.render('upload', {
+    user: req.session.user,
+    token: req.session.token,
+    data: 'Error al subir el archivo',
+  });
 };

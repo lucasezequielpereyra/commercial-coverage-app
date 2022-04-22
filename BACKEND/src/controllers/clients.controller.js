@@ -76,16 +76,10 @@ export const newFile = (req, res) => {
       });
     });
 
-    res.status(201).json({
-      ok: true,
-      message: 'File loaded successfully',
-    });
+    res.status(201).redirect('/api/backoffice/uploaded');
   } catch (err) {
-    res.status(500).json({
-      ok: false,
-      message: 'Error loading file',
-      errors: err,
-    });
+    console.log(err.message);
+    res.status(500).redirect('/api/backoffice/uploaded-error');
   }
 };
 

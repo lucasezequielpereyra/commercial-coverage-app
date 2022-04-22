@@ -4,17 +4,19 @@
   <title>Backoffice - MyKOF</title>
   <body>
     <div class="container-header-uploads">
-      <div class="container-user">
+      <div class="user">
         <h1> Bienvenidx, <%=user %></h1>
-        <a class='logout' href="/api/backoffice/logout">Salir</a>
+      <a class='logout' href="/api/backoffice/logout">Salir</a>
       </div>
       <img src="/assets/logo.png" alt="Logo" class="logo-upload">
     </div>
     <div>
       <form action="/api/v1/files/newFile" method="post" enctype="multipart/form-data" class="form-upload">
-        <input class="input-file" type="file" name="file" />
+        <input class="input-file" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="file" required="true" />
         <input class="input-upload" type="submit" value="Upload" />
+        <p class="p-upload"><%=data %></p>
       </form>
+      <p class="p-info" >Solo se admiten archivos excel en todos sus formatos.</p>
     </div>
   </body>
 </html>
