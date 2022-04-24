@@ -18,12 +18,12 @@ export const login = async (req, res) => {
       if (!matchPassword)
         return res
           .status(401)
-          .render('index', { login: false, message: 'Invalid password' });
+          .render('index', { error: 'Verifique los datos' });
 
       if (!userFound)
         return res
           .status(400)
-          .render('index', { login: false, message: 'User not found' });
+          .render('index', { error: 'Verifique los datos' });
 
       const token = jwt.sign({ id: userFound._id }, SECRET_WORD, {
         expiresIn: 86400,
@@ -37,12 +37,10 @@ export const login = async (req, res) => {
         data: '',
       });
     } else {
-      res
-        .status(401)
-        .render('index', { login: false, message: 'User not found' });
+      res.status(401).render('index', { error: 'Verifique los datos' });
     }
   } catch (error) {
-    res.status(500).render('index', { login: false, message: error.message });
+    res.status(500).render('index', { error: error.message });
   }
 };
 

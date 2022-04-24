@@ -7,6 +7,11 @@
     </div>
     <form action="/api/backoffice/" method="post" class='form-container'>    
       <div class="container">
+        <% if( typeof(error) !=="undefined") { %>
+          <div class="alert-danger">
+            <%= error %>
+          </div>
+        <% } %>
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Ingrese su usuario" name="username" required>
     

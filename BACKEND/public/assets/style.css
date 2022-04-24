@@ -35,6 +35,10 @@ img.logo {
   align-items: center;
 }
 
+.alert-danger{
+  color: red;
+  margin-bottom: 1%;
+}
 
 input[type=text], input[type=password] {
   width: 60%;
