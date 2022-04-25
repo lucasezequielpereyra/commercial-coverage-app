@@ -33,7 +33,6 @@ export const login = async (req, res) => {
       req.session.user = userFound.username;
       res.render('upload', {
         user: req.session.user,
-        token: req.session.token,
         data: '',
       });
     } else {
@@ -48,7 +47,6 @@ export const render = (req, res) => {
   if (req.session?.token) {
     res.render('upload', {
       user: req.session.user,
-      token: req.session.token,
       data: '',
     });
   } else {
@@ -74,7 +72,6 @@ export const logout = (req, res) => {
 export const uploaded = (req, res) => {
   res.render('upload', {
     user: req.session.user,
-    token: req.session.token,
     data: 'El archivo se ha subido correctamente',
   });
 };
@@ -82,7 +79,6 @@ export const uploaded = (req, res) => {
 export const errorUploaded = (req, res) => {
   res.render('upload', {
     user: req.session.user,
-    token: req.session.token,
     data: 'Error al subir el archivo',
   });
 };

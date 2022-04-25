@@ -12,71 +12,88 @@ export const verifyToken = async (req, res, next) => {
     const decoded = jwt.verify(token, SECRET_WORD);
     req.userId = decoded.id;
     next();
-  } catch (error) {
+  } catch (err) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 };
 
 export const isAdmin = async (req, res, next) => {
-  const user = await User.findById(req.userId);
-  const roles = await Role.find({ _id: { $in: user.roles } });
+  try {
+    const user = await User.findById(req.userId);
+    const roles = await Role.find({ _id: { $in: user.roles } });
 
-  for (let i = 0; i < roles.length; i++) {
-    if (roles[i].name === 'admin') {
-      next();
-      return;
+    for (let i = 0; i < roles.length; i++) {
+      if (roles[i].name === 'admin') {
+        next();
+        return;
+      }
     }
-  }
 
-  return res
-    .status(403)
-    .json({ message: 'Not authorized - Require admin role' });
+    return res.status(403).json({ message: 'Unauthorized' });
+  } catch (err) {
+    return res
+      .status(403)
+      .json({ error: 'Not authorized - Require admin role' });
+  }
 };
 
 export const isBackoffice = async (req, res, next) => {
-  const user = await User.findById(req.userId);
-  const roles = await Role.find({ _id: { $in: user.roles } });
+  try {
+    const username = req.session?.user || req.body.username;
+    const user = await User.findOne({ username: username });
+    const roles = await Role.find({ _id: { $in: user.roles } });
 
-  for (let i = 0; i < roles.length; i++) {
-    if (roles[i].name === 'backoffice') {
-      next();
-      return;
+    for (let i = 0; i < roles.length; i++) {
+      if (roles[i].name === 'backoffice') {
+        next();
+        return;
+      }
     }
-  }
 
-  return res
-    .status(403)
-    .json({ message: 'Not authorized - Require backoffice role' });
+    return res.status(403).render('index', {
+      error: 'No tienes permiso para acceder a este panel',
+    });
+  } catch (err) {
+    return res.status(403).render('index', { error: err.message });
+  }
 };
 
 export const isComer = async (req, res, next) => {
-  const user = await User.findById(req.userId);
-  const roles = await Role.find({ _id: { $in: user.roles } });
+  try {
+    const user = await User.findById(req.userId);
+    const roles = await Role.find({ _id: { $in: user.roles } });
 
-  for (let i = 0; i < roles.length; i++) {
-    if (roles[i].name === 'comercializador') {
-      next();
-      return;
+    for (let i = 0; i < roles.length; i++) {
+      if (roles[i].name === 'comercializador') {
+        next();
+        return;
+      }
     }
-  }
 
-  return res
-    .status(403)
-    .json({ message: 'Not authorized - Require comer role' });
+    return res.status(403).json({ message: 'Unauthorized' });
+  } catch (err) {
+    return res
+      .status(403)
+      .json({ error: 'Not authorized - Require comer role' });
+  }
 };
 
 export const isEjecutivo = async (req, res, next) => {
-  const user = await User.findById(req.userId);
-  const roles = await Role.find({ _id: { $in: user.roles } });
+  try {
+    const user = await User.findById(req.userId);
+    const roles = await Role.find({ _id: { $in: user.roles } });
 
-  for (let i = 0; i < roles.length; i++) {
-    if (roles[i].name === 'ejecutivo') {
-      next();
-      return;
+    for (let i = 0; i < roles.length; i++) {
+      if (roles[i].name === 'ejecutivo') {
+        next();
+        return;
+      }
     }
-  }
 
-  return res
-    .status(403)
-    .json({ message: 'Not authorized - Require ejecutivo role' });
+    return res.status(403).json({ message: 'Unauthorized' });
+  } catch (err) {
+    return res
+      .status(403)
+      .json({ error: 'Not authorized - Require ejecutivo role' });
+  }
 };
