@@ -49,6 +49,7 @@ npm run dev
 ## Run Locally Frontend Module
 
 - You need have react native environment
+
   Go to the frontend project directory
 
 ```bash
@@ -64,7 +65,7 @@ Install dependencies
 Starting app
 
 ```bash
-  cd commercial-coverage-app/FRONTEND
+  npm run android
 ```
 
 ## Demo
