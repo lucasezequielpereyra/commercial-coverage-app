@@ -6,14 +6,14 @@ const SECRET_WORD = process.env.SECRET_WORD;
 
 export const verifyToken = async (req, res, next) => {
   let token = req.session?.token || req.headers['x-access-token'];
-  if (!token) return res.status(403).json({ message: 'No token provided' });
+  if (!token) return res.status(403).redirect('/api/backoffice');
 
   try {
     const decoded = jwt.verify(token, SECRET_WORD);
     req.userId = decoded.id;
     next();
   } catch (err) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).redirect('/api/backoffice');
   }
 };
 
@@ -41,18 +41,24 @@ export const isBackoffice = async (req, res, next) => {
   try {
     const username = req.session?.user || req.body.username;
     const user = await User.findOne({ username: username });
-    const roles = await Role.find({ _id: { $in: user.roles } });
+    if (user) {
+      const roles = await Role.find({ _id: { $in: user.roles } });
 
-    for (let i = 0; i < roles.length; i++) {
-      if (roles[i].name === 'backoffice') {
-        next();
-        return;
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i].name === 'backoffice') {
+          next();
+          return;
+        }
       }
-    }
 
-    return res.status(403).render('index', {
-      error: 'No tienes permiso para acceder a este panel',
-    });
+      return res.status(403).render('index', {
+        error: 'No tienes permiso para acceder a este panel',
+      });
+    } else {
+      return res
+        .status(403)
+        .render('index', { error: 'Verifique los datos ingresados' });
+    }
   } catch (err) {
     return res.status(403).render('index', { error: err.message });
   }

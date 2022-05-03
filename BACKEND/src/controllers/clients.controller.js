@@ -83,18 +83,19 @@ export const newFile = (req, res) => {
   }
 };
 
-export const getAll = (req, res) => {
-  Client.find({}, (err, clients) => {
+export const getCoveragesKeys = (req, res) => {
+  Client.find({ Cliente: 300012046 }, 'Coberturas', (err, data) => {
     if (err) {
       return res.status(500).json({
         ok: false,
-        mensaje: 'Error loaded clients',
+        mensaje: 'Error loaded coverages',
         errors: err,
       });
     }
+    const coberturas = Object.keys(data[0].Coberturas);
+
     res.status(200).json({
-      ok: true,
-      clients: clients,
+      coberturas,
     });
   });
 };

@@ -6,7 +6,7 @@ import * as jwtCtrl from '../middlewares/authJwt';
 const upload = multer({ dest: 'uploads/' });
 const router = Router();
 
-router.get('/getAll', clientsCtrl.getAll);
+router.get('/getCoveragesKeys', clientsCtrl.getCoveragesKeys);
 
 router.get(
   '/getByClient/:client',
@@ -36,12 +36,6 @@ router.get(
   '/getSalarialCoveragesByClient/:client',
   [jwtCtrl.verifyToken, jwtCtrl.isComer],
   clientsCtrl.getSalarialCoveragesByClient,
-);
-
-router.get(
-  '/getByZone/:zone',
-  [jwtCtrl.verifyToken, jwtCtrl.isEjecutivo],
-  clientsCtrl.getByZone,
 );
 
 router.post(
