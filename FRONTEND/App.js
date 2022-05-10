@@ -19,6 +19,7 @@ const App = () => {
           backgroundColor={colors.primaryColor}
           barStyle="light-content"
         />
+
         <Header />
         <Login />
       </SafeAreaView>
