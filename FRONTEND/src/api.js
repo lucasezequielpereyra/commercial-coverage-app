@@ -1,4 +1,4 @@
-const API = 'http://159.89.86.222/api/v1';
+const API = 'http://192.168.0.23:3001/api/v1';
 
 export const getDataByCliente = async (cliente, userToken) => {
   const res = await fetch(`${API}/files/getByClient/${cliente}`, {
